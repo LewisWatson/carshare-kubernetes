@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: carshare-api
+  labels:
+    app: carshare-api
+spec:
+  replicas: 1
+  selector:
+    app: carshare-api
+  template:
+    metadata:
+      labels:
+        app: carshare-api
+    spec:
+      containers:
+      - image: lewiswatson/carshare-back:0.4.0
+        imagePullPolicy: Always
+        name: carshare-api
+        ports:
+        - containerPort: 31415
+          hostPort: 31415
+        args:
+        - --mgoURL=mongo
