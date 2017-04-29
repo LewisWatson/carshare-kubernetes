@@ -16,7 +16,7 @@ spec:
         backend:  
           serviceName: carshare-web
           servicePort: 80
-      - path: /api/0.4.0
+      - path: /api
         backend:
           serviceName: carshare-api
           servicePort: 80

@@ -25,7 +25,7 @@ kubectl create -f carshare-api-rc.yaml
 kubectl create -f carshare-api-service.yaml
 ```
 
-## Deploy Ingress Controller
+## Configure Ingress
 
 Ingress is not enabled by default in [minikube].
 
@@ -33,7 +33,7 @@ Ingress is not enabled by default in [minikube].
 minikube addons enable ingress
 ```
 
-Initialise helm on the cluster
+Initialise [helm] on the cluster
 
 ```bash
 helm init
@@ -43,6 +43,21 @@ Deploy the [NGINX Ingress Helm Chart][nginx-ingress].
 
 ```bash
 helm install --name my-release stable/nginx-ingress
+```
+
+Create Ingress
+
+```bash
+kubectl create -f ingress-rc.yaml
+```
+## Test
+
+You can test the system by adding `carshare.test` to your `/ets/hosts` file and performing a `GET` request on the API. It should repond with an error 404 forbidden as you will not be authenticated.
+
+```bash
+$ echo "$(minikube ip) carshare.test" | sudo tee -a /etc/hosts
+$ curl http://carshare.test/api/v0/carShares
+{"errors":[{"status":"403","title":"Forbidden"}]}
 ```
 
 [minikube]: https://github.com/kubernetes/minikube
