@@ -22,3 +22,6 @@ spec:
           hostPort: 31415
         args:
         - --mgoURL=mongo
+        env:
+        - name: GIN_MODE
+          value: release

@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: carshare-web
+  labels:
+    app: carshare-web
+spec:
+  replicas: 1
+  selector:
+    app: carshare-web
+  template:
+    metadata:
+      labels:
+        app: carshare-web
+    spec:
+      containers:
+      - image: lewiswatson/carshare-web
+        imagePullPolicy: Always
+        name: carshare-web
+        ports:
+        - containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /index.html
+            port: 80
+          initialDelaySeconds: 30
+          timeoutSeconds: 1
