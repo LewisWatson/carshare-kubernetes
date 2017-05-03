@@ -14,7 +14,7 @@ spec:
         app: carshare-api
     spec:
       containers:
-      - image: lewiswatson/carshare-back:0.4.0
+      - image: lewiswatson/carshare-back:0.4.1
         imagePullPolicy: Always
         name: carshare-api
         ports:
